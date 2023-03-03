@@ -23,8 +23,8 @@ def read_one(person_id):
     else:
         abort(404, f"Person with ID {person_id} not found")
 
-def update(lname, person):
-    existing_person = Person.query.filter(Person.lname == lname).one_or_none()
+def update(person_id, person):
+    existing_person = Person.query.get(person_id)
 
     if existing_person:
         update_person = person_schema.load(person, session=db.session)
@@ -33,7 +33,7 @@ def update(lname, person):
         db.session.commit()
         return person_schema.dump(existing_person), 201
     else:
-        abort(404, f"Person with last name {lname} not found")
+        abort(404, f"Person with ID {person_id} not found")
 
 
 def delete(lname):
