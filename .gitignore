@@ -1,0 +1,5 @@
+venv
+henvy
+__pycache__
+.env
+*.db
